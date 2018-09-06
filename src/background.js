@@ -16,10 +16,14 @@ if (!document.pictureInPictureEnabled) {
   chrome.browserAction.setTitle({ title: 'Picture-in-Picture NOT supported' });
 } else {
   chrome.browserAction.onClicked.addListener(tab => {
-    const code = `
+    chrome.permissions.request({origins: ['<all_urls>'] }, granted => {
+      const code = `
       (async () => {
         const video = document.querySelector('video');
-        
+
+        if (!video)
+          return;
+
         if (video.hasAttribute('__pip__')) {
           await document.exitPictureInPicture();
         } else {
@@ -31,6 +35,7 @@ if (!document.pictureInPictureEnabled) {
         }
       })();
     `;
-    chrome.tabs.executeScript({ code });
+    chrome.tabs.executeScript({ code, allFrames: granted });
+    });
   });
 }
