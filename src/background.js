@@ -24,8 +24,11 @@ var _gaq = _gaq || [];
 _gaq.push(['_setAccount', 'UA-134864766-1']);
 
 chrome.runtime.onMessage.addListener(data => {
-  if (data.message === 'enter')
+  if (data.message === 'enter') {
     _gaq.push(['_trackPageview']);
+  } else if (data.message === 'keyup') {
+    chrome.tabs.executeScript({ file: 'script.js', allFrames: true });
+  }
 });
 
 (function() {
