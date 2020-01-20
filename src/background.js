@@ -25,7 +25,7 @@ _gaq.push(['_setAccount', 'UA-134864766-1']);
 
 chrome.runtime.onMessage.addListener(data => {
   if (data.message === 'enter')
-    _gaq.push(['_trackPageview']);
+    _gaq.push(['_trackPageview', data.hostname]);
 });
 
 chrome.storage.sync.get({ optOutAnalytics: false }, results => {

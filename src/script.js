@@ -35,6 +35,6 @@
     video.addEventListener('leavepictureinpicture', event => {
       video.removeAttribute('__pip__');
     }, { once: true });
-    chrome.runtime.sendMessage({ message: 'enter' });
+    chrome.runtime.sendMessage({ message: 'enter', hostname: location.hostname });
   }
 })();
