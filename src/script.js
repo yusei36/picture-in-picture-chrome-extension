@@ -29,6 +29,10 @@ function findLargestPlayingVideo() {
 }
 
 async function requestPictureInPicture(video) {
+  if (video.hasAttribute("disablePictureInPicture"))
+  {
+    video.removeAttribute("disablePictureInPicture");
+  }
   await video.requestPictureInPicture();
   video.setAttribute('__pip__', true);
   video.addEventListener('leavepictureinpicture', event => {
