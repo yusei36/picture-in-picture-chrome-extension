@@ -25,6 +25,7 @@
       }
     }
   },
+  "content_security_policy": "default-src 'self';",
   "permissions": [
     "<all_urls>"
   ],
